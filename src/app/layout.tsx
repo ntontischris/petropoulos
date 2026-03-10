@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Group 110 | Real Estate & Consulting",
     template: "%s | Group 110",
   },
-  description: "Smart Real Estate Investments - Ολοκληρωμένες λύσεις ακινήτων",
+  description: "Smart Real Estate Investments",
 };
 
 export default function RootLayout({
@@ -21,8 +21,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // html lang is set in [locale]/layout.tsx
   return (
-    <html lang="el">
+    <html suppressHydrationWarning>
       <body className={`${inter.variable} antialiased`}>{children}</body>
     </html>
   );
