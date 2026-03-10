@@ -1,6 +1,6 @@
 "use server";
 
-import { createSupabaseAdmin } from "@/lib/supabase/admin";
+import { createSupabaseServer } from "@/lib/supabase/server";
 import { contactSchema } from "@/validations/contact";
 import type { ActionResult } from "@/types/common";
 
@@ -18,7 +18,7 @@ export async function submitContact(formData: FormData): Promise<ActionResult> {
     return { success: false, error: "Validation failed" };
   }
 
-  const supabase = createSupabaseAdmin();
+  const supabase = await createSupabaseServer();
   const { error } = await supabase.from("contact_submissions").insert({
     name: parsed.data.name,
     email: parsed.data.email,

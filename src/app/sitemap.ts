@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { createSupabaseAdmin } from "@/lib/supabase/admin";
+import { createSupabaseServer } from "@/lib/supabase/server";
 
 const BASE_URL = "https://group110.gr";
 const LOCALES = ["el", "en"];
@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic project pages (only when Supabase is configured)
   if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
     try {
-      const supabase = createSupabaseAdmin();
+      const supabase = await createSupabaseServer();
       const { data: projects } = await supabase
         .from("projects")
         .select("slug, updated_at");

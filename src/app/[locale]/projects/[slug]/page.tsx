@@ -16,8 +16,16 @@ interface ProjectDetailProps {
 }
 
 export async function generateStaticParams() {
-  // Will be populated when Supabase is connected
-  return [];
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+
+  try {
+    const supabase = await createSupabaseServer();
+    const { data: projects } = await supabase.from("projects").select("slug");
+
+    return (projects ?? []).map((p) => ({ slug: p.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({

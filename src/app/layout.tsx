@@ -16,14 +16,16 @@ export const metadata: Metadata = {
   description: "Smart Real Estate Investments",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale?: string }>;
 }>) {
-  // html lang is set in [locale]/layout.tsx
+  const { locale } = await params;
   return (
-    <html suppressHydrationWarning>
+    <html lang={locale ?? "el"} suppressHydrationWarning>
       <body className={`${inter.variable} antialiased`}>{children}</body>
     </html>
   );

@@ -116,9 +116,9 @@ export default async function AboutPage({ params }: AboutPageProps) {
         <Container>
           <div className="grid gap-8 sm:grid-cols-3">
             {[
-              { value: "15+", label: t("title") },
-              { value: "5+", label: t("storyTitle") },
-              { value: "50+", label: t("teamTitle") },
+              { value: "15+", label: t("statsProjects") },
+              { value: "5+", label: t("statsYears") },
+              { value: "50+", label: t("statsClients") },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <p className="text-4xl font-bold text-accent">{stat.value}</p>

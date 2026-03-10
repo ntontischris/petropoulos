@@ -77,23 +77,27 @@ export function BookingWizard({ bookingTypes, locale }: BookingWizardProps) {
     setIsSubmitting(true);
     setError(null);
 
-    const result = await createBooking({
-      booking_type_id: state.bookingTypeId,
-      customer_name: state.customerName,
-      customer_email: state.customerEmail,
-      customer_phone: state.customerPhone,
-      preferred_date: state.preferredDate,
-      preferred_time: state.preferredTime,
-      session_method: state.sessionMethod,
-      notes: state.notes || undefined,
-    });
+    try {
+      const result = await createBooking({
+        booking_type_id: state.bookingTypeId,
+        customer_name: state.customerName,
+        customer_email: state.customerEmail,
+        customer_phone: state.customerPhone,
+        preferred_date: state.preferredDate,
+        preferred_time: state.preferredTime,
+        session_method: state.sessionMethod,
+        notes: state.notes || undefined,
+      });
 
-    setIsSubmitting(false);
-
-    if (result.success) {
-      setIsSubmitted(true);
-    } else {
-      setError(result.error);
+      if (result.success) {
+        setIsSubmitted(true);
+      } else {
+        setError(result.error);
+      }
+    } catch {
+      setError(tCommon("error"));
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -101,7 +105,7 @@ export function BookingWizard({ bookingTypes, locale }: BookingWizardProps) {
     service: t("step1Title"),
     datetime: t("step2Title"),
     details: t("step3Title"),
-    confirmation: t("step5Title"),
+    confirmation: t("step4Title"),
   };
 
   return (

@@ -1,6 +1,6 @@
 "use server";
 
-import { createSupabaseAdmin } from "@/lib/supabase/admin";
+import { createSupabaseServer } from "@/lib/supabase/server";
 import { bookingSchema } from "@/validations/booking";
 import type { ActionResult } from "@/types/common";
 
@@ -12,7 +12,7 @@ export async function createBooking(
     return { success: false, error: "Validation failed" };
   }
 
-  const supabase = createSupabaseAdmin();
+  const supabase = await createSupabaseServer();
 
   // Check if booking type is free
   const { data: bookingType, error: typeError } = await supabase
