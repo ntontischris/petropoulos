@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { hasLocale } from "next-intl";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -44,5 +46,11 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  return children;
+  return (
+    <NextIntlClientProvider>
+      <Header />
+      <main className="min-h-screen">{children}</main>
+      <Footer />
+    </NextIntlClientProvider>
+  );
 }
