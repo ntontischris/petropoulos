@@ -4,6 +4,10 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import {
+  OrganizationJsonLd,
+  LocalBusinessJsonLd,
+} from "@/components/seo/json-ld";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -48,6 +52,8 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider>
+      <OrganizationJsonLd />
+      <LocalBusinessJsonLd />
       <Header />
       <main className="min-h-screen">{children}</main>
       <Footer />
