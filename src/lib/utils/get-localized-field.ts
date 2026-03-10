@@ -1,10 +1,12 @@
 import type { Locale } from "@/types/common";
 
-export function getLocalizedField<T extends Record<string, unknown>>(
-  item: T,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function getLocalizedField(
+  item: any,
   field: string,
   locale: Locale,
 ): string {
-  const key = `${field}_${locale}` as keyof T;
+  if (!item) return "";
+  const key = `${field}_${locale}`;
   return (item[key] as string) ?? "";
 }
