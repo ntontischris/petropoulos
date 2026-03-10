@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
 :root {
+  /* Brand Colors */
+  --color-primary-50: #f0f3f8;
+  --color-primary-100: #d9e0ed;
+  --color-primary-200: #b3c1db;
+  --color-primary-300: #8da2c9;
+  --color-primary-400: #6783b7;
+  --color-primary-500: #4164a5;
+  --color-primary-600: #344f84;
+  --color-primary-700: #273b63;
+  --color-primary-800: #1b2a4a;
+  --color-primary-900: #111b30;
+  --color-primary-950: #0a1019;
+
+  --color-secondary-50: #f9fafb;
+  --color-secondary-100: #f3f4f6;
+  --color-secondary-200: #e5e7eb;
+  --color-secondary-300: #d1d5db;
+  --color-secondary-400: #9ca3af;
+  --color-secondary-500: #6b7280;
+  --color-secondary-600: #4b5563;
+  --color-secondary-700: #374151;
+  --color-secondary-800: #1f2937;
+  --color-secondary-900: #111827;
+  --color-secondary-950: #030712;
+
+  --color-accent: #c8a96e;
+  --color-accent-light: #d4bc8a;
+  --color-accent-dark: #b08f4f;
+
+  /* Backgrounds */
   --background: #ffffff;
-  --foreground: #171717;
+  --background-alt: #f8f9fa;
+  --foreground: #1b2a4a;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary-50: var(--color-primary-50);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary-800: var(--color-primary-800);
+  --color-primary-900: var(--color-primary-900);
+  --color-primary-950: var(--color-primary-950);
+
+  --color-secondary-50: var(--color-secondary-50);
+  --color-secondary-100: var(--color-secondary-100);
+  --color-secondary-200: var(--color-secondary-200);
+  --color-secondary-300: var(--color-secondary-300);
+  --color-secondary-400: var(--color-secondary-400);
+  --color-secondary-500: var(--color-secondary-500);
+  --color-secondary-600: var(--color-secondary-600);
+  --color-secondary-700: var(--color-secondary-700);
+  --color-secondary-800: var(--color-secondary-800);
+  --color-secondary-900: var(--color-secondary-900);
+  --color-secondary-950: var(--color-secondary-950);
+
+  --color-accent: var(--color-accent);
+  --color-accent-light: var(--color-accent-light);
+  --color-accent-dark: var(--color-accent-dark);
+
+  --font-sans: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
