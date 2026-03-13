@@ -8,7 +8,7 @@ import {
   OrganizationJsonLd,
   LocalBusinessJsonLd,
 } from "@/components/seo/json-ld";
-import { SITE_CONFIG } from "@/lib/constants";
+import { BRAND } from "@/lib/constants";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -32,8 +32,8 @@ export async function generateMetadata({
     description: t("homeDescription"),
     alternates: {
       languages: {
-        el: `${SITE_CONFIG.url}/el`,
-        en: `${SITE_CONFIG.url}/en`,
+        el: `${BRAND.url}/el`,
+        en: `${BRAND.url}/en`,
       },
     },
   };
