@@ -16,17 +16,24 @@ export function CtaBanner({
   href,
 }: CtaBannerProps) {
   return (
-    <section className="bg-primary-800 py-16">
-      <Container className="text-center">
+    <section className="relative overflow-hidden bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 py-20">
+      <div className="geometric-pattern absolute inset-0" />
+      <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-accent/5 blur-3xl" />
+      <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-accent/5 blur-3xl" />
+      <Container className="relative z-10 text-center">
         <h2 className="text-3xl font-bold text-white sm:text-4xl">{title}</h2>
         {subtitle && (
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-200">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-200/90">
             {subtitle}
           </p>
         )}
-        <div className="mt-8">
+        <div className="mt-10">
           <Link href={href}>
-            <Button variant="secondary" size="lg">
+            <Button
+              variant="secondary"
+              size="lg"
+              className="animate-pulse-glow"
+            >
               {buttonText}
             </Button>
           </Link>

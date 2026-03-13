@@ -66,7 +66,6 @@ export default async function ProjectDetailPage({
 
   if (!project) notFound();
 
-  // Get prev/next projects for navigation
   const { data: allProjects } = await supabase
     .from("projects")
     .select("slug, title_el, title_en, sort_order")
@@ -94,29 +93,30 @@ export default async function ProjectDetailPage({
 
   return (
     <>
-      <section className="bg-primary-900 py-16">
-        <Container>
+      {/* Hero header */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800 py-20 md:py-28">
+        <div className="geometric-pattern absolute inset-0" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-950/30 to-transparent" />
+        <Container className="relative z-10">
           <Link
             href="/projects"
-            className="mb-4 inline-flex items-center gap-2 text-sm text-primary-300 hover:text-white"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-700/50 px-4 py-1.5 text-sm text-primary-300 transition-all hover:border-accent/50 hover:text-white"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-3.5 w-3.5" />
             {t("title")}
           </Link>
-          <h1 className="text-3xl font-bold text-white sm:text-4xl">
+          <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             {getLocalizedField(project, "title", locale as Locale)}
           </h1>
-          <div className="mt-4 flex flex-wrap items-center gap-4">
-            <Badge
-              variant={project.category === "renovation" ? "default" : "accent"}
-            >
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Badge variant="glass">
               {categoryLabels[project.category] ?? project.category}
             </Badge>
-            <span className="flex items-center gap-1 text-sm text-primary-300">
+            <span className="flex items-center gap-1.5 text-sm text-primary-300/80">
               <MapPin className="h-4 w-4" />
               {getLocalizedField(project, "location", locale as Locale)}
             </span>
-            <span className="flex items-center gap-1 text-sm text-primary-300">
+            <span className="flex items-center gap-1.5 text-sm text-primary-300/80">
               <Clock className="h-4 w-4" />
               {project.duration}
             </span>
@@ -124,7 +124,7 @@ export default async function ProjectDetailPage({
         </Container>
       </section>
 
-      <section className="py-16">
+      <section className="py-20">
         <Container>
           {/* Description */}
           <div className="mx-auto max-w-3xl">
@@ -135,17 +135,18 @@ export default async function ProjectDetailPage({
 
           {/* Before / After */}
           {(beforeImages.length > 0 || afterImages.length > 0) && (
-            <div className="mt-16 grid gap-8 md:grid-cols-2">
+            <div className="mt-20 grid gap-10 md:grid-cols-2">
               {beforeImages.length > 0 && (
                 <div>
-                  <h3 className="mb-4 text-xl font-semibold text-primary-800">
+                  <h3 className="mb-6 flex items-center gap-3 text-xl font-semibold text-primary-800">
+                    <span className="inline-block h-0.5 w-8 bg-secondary-300" />
                     {t("before")}
                   </h3>
                   <div className="grid gap-4">
                     {beforeImages.map((img) => (
                       <div
                         key={img.id}
-                        className="relative aspect-[4/3] overflow-hidden rounded-xl"
+                        className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-secondary-100 shadow-card"
                       >
                         <Image
                           src={img.image_url}
@@ -157,7 +158,7 @@ export default async function ProjectDetailPage({
                             ) || t("before")
                           }
                           fill
-                          className="object-cover"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
                           sizes="(max-width: 768px) 100vw, 50vw"
                         />
                       </div>
@@ -167,14 +168,15 @@ export default async function ProjectDetailPage({
               )}
               {afterImages.length > 0 && (
                 <div>
-                  <h3 className="mb-4 text-xl font-semibold text-primary-800">
+                  <h3 className="mb-6 flex items-center gap-3 text-xl font-semibold text-primary-800">
+                    <span className="inline-block h-0.5 w-8 bg-accent" />
                     {t("after")}
                   </h3>
                   <div className="grid gap-4">
                     {afterImages.map((img) => (
                       <div
                         key={img.id}
-                        className="relative aspect-[4/3] overflow-hidden rounded-xl"
+                        className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-secondary-100 shadow-card"
                       >
                         <Image
                           src={img.image_url}
@@ -186,7 +188,7 @@ export default async function ProjectDetailPage({
                             ) || t("after")
                           }
                           fill
-                          className="object-cover"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
                           sizes="(max-width: 768px) 100vw, 50vw"
                         />
                       </div>
@@ -198,14 +200,16 @@ export default async function ProjectDetailPage({
           )}
 
           {/* Prev / Next Navigation */}
-          <div className="mt-16 flex items-center justify-between border-t border-secondary-200 pt-8">
+          <div className="mt-20 flex items-stretch justify-between gap-4 border-t border-secondary-200 pt-10">
             {prevProject ? (
               <Link
                 href={`/projects/${prevProject.slug}`}
-                className="flex items-center gap-2 text-sm font-medium text-primary-800 hover:text-accent"
+                className="group flex items-center gap-3 rounded-xl border border-secondary-100 bg-white px-6 py-4 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/20 hover:shadow-card-hover"
               >
-                <ArrowLeft className="h-4 w-4" />
-                {getLocalizedField(prevProject, "title", locale as Locale)}
+                <ArrowLeft className="h-4 w-4 text-secondary-400 transition-transform group-hover:-translate-x-1 group-hover:text-accent" />
+                <span className="text-sm font-medium text-primary-800">
+                  {getLocalizedField(prevProject, "title", locale as Locale)}
+                </span>
               </Link>
             ) : (
               <div />
@@ -213,10 +217,12 @@ export default async function ProjectDetailPage({
             {nextProject ? (
               <Link
                 href={`/projects/${nextProject.slug}`}
-                className="flex items-center gap-2 text-sm font-medium text-primary-800 hover:text-accent"
+                className="group flex items-center gap-3 rounded-xl border border-secondary-100 bg-white px-6 py-4 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/20 hover:shadow-card-hover"
               >
-                {getLocalizedField(nextProject, "title", locale as Locale)}
-                <ArrowRight className="h-4 w-4" />
+                <span className="text-sm font-medium text-primary-800">
+                  {getLocalizedField(nextProject, "title", locale as Locale)}
+                </span>
+                <ArrowRight className="h-4 w-4 text-secondary-400 transition-transform group-hover:translate-x-1 group-hover:text-accent" />
               </Link>
             ) : (
               <div />

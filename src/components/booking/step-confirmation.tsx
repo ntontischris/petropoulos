@@ -34,9 +34,9 @@ export function StepConfirmation({
 }: StepConfirmationProps) {
   if (isSubmitted) {
     return (
-      <div className="py-12 text-center">
-        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-          <Check className="h-8 w-8 text-green-600" />
+      <div className="py-16 text-center">
+        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-50 shadow-lg shadow-green-100">
+          <Check className="h-10 w-10 text-green-600" />
         </div>
         <h3 className="text-2xl font-bold text-primary-800">
           {labels.successTitle}
@@ -83,11 +83,11 @@ export function StepConfirmation({
       <h3 className="mb-6 text-xl font-semibold text-primary-800">
         {labels.confirmTitle}
       </h3>
-      <div className="divide-y divide-secondary-100 rounded-xl border border-secondary-200">
+      <div className="divide-y divide-secondary-50 overflow-hidden rounded-xl border border-secondary-200 bg-white shadow-card">
         {rows.map((row) => (
           <div
             key={row.label}
-            className="flex items-center justify-between px-5 py-3"
+            className="flex items-center justify-between px-6 py-4 transition-colors hover:bg-secondary-50/50"
           >
             <span className="text-sm text-secondary-500">{row.label}</span>
             <span className="font-medium text-primary-800">{row.value}</span>

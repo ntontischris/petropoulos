@@ -1,9 +1,10 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { PageHeader } from "@/components/ui/page-header";
 import { ContactForm } from "@/components/forms/contact-form";
 import { ContactInfo } from "@/components/ui/contact-info";
+import { MapPin } from "lucide-react";
 
 interface ContactPageProps {
   params: Promise<{ locale: string }>;
@@ -28,22 +29,14 @@ export default async function ContactPage({ params }: ContactPageProps) {
 
   return (
     <>
-      <section className="bg-primary-900 py-20">
-        <Container>
-          <SectionHeading
-            title={t("title")}
-            subtitle={t("subtitle")}
-            className="[&_h2]:text-white [&_p]:text-primary-200"
-          />
-        </Container>
-      </section>
+      <PageHeader title={t("title")} subtitle={t("subtitle")} />
 
-      <section className="py-16">
+      <section className="py-20">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-2">
+          <div className="grid gap-14 lg:grid-cols-2">
             {/* Form */}
-            <div>
-              <h2 className="mb-6 text-2xl font-bold text-primary-800">
+            <div className="rounded-2xl border border-secondary-100 bg-white p-8 shadow-card">
+              <h2 className="mb-8 text-2xl font-bold text-primary-800">
                 {t("formTitle")}
               </h2>
               <ContactForm />
@@ -51,7 +44,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
 
             {/* Info */}
             <div>
-              <h2 className="mb-6 text-2xl font-bold text-primary-800">
+              <h2 className="mb-8 text-2xl font-bold text-primary-800">
                 {t("infoTitle")}
               </h2>
               <ContactInfo
@@ -68,9 +61,14 @@ export default async function ContactPage({ params }: ContactPageProps) {
               />
 
               {/* Map Placeholder */}
-              <div className="mt-8 aspect-video overflow-hidden rounded-xl bg-secondary-100">
-                <div className="flex h-full items-center justify-center text-secondary-400">
-                  Google Maps
+              <div className="mt-8 overflow-hidden rounded-xl border border-secondary-100 shadow-card">
+                <div className="flex aspect-video items-center justify-center bg-gradient-to-br from-secondary-50 to-secondary-100">
+                  <div className="text-center">
+                    <MapPin className="mx-auto mb-2 h-8 w-8 text-accent" />
+                    <p className="text-sm font-medium text-secondary-500">
+                      Google Maps
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

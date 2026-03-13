@@ -25,16 +25,16 @@ export function StepDetails({
   labels,
 }: StepDetailsProps) {
   const inputClass =
-    "w-full rounded-lg border border-secondary-200 px-4 py-3 text-primary-800 transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20";
+    "w-full rounded-xl border border-secondary-200 bg-secondary-50 px-4 py-3 text-primary-800 transition-all focus:border-primary-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20";
 
   return (
     <div className="space-y-6">
       <div>
         <label
           htmlFor="bk-name"
-          className="mb-1 block text-sm font-medium text-primary-800"
+          className="mb-1.5 block text-sm font-medium text-primary-800"
         >
-          {labels.nameLabel} *
+          {labels.nameLabel} <span className="text-accent">*</span>
         </label>
         <input
           id="bk-name"
@@ -50,9 +50,9 @@ export function StepDetails({
       <div>
         <label
           htmlFor="bk-email"
-          className="mb-1 block text-sm font-medium text-primary-800"
+          className="mb-1.5 block text-sm font-medium text-primary-800"
         >
-          {labels.emailLabel} *
+          {labels.emailLabel} <span className="text-accent">*</span>
         </label>
         <input
           id="bk-email"
@@ -68,9 +68,9 @@ export function StepDetails({
       <div>
         <label
           htmlFor="bk-phone"
-          className="mb-1 block text-sm font-medium text-primary-800"
+          className="mb-1.5 block text-sm font-medium text-primary-800"
         >
-          {labels.phoneLabel} *
+          {labels.phoneLabel} <span className="text-accent">*</span>
         </label>
         <input
           id="bk-phone"
@@ -86,7 +86,7 @@ export function StepDetails({
       <div>
         <label
           htmlFor="bk-notes"
-          className="mb-1 block text-sm font-medium text-primary-800"
+          className="mb-1.5 block text-sm font-medium text-primary-800"
         >
           {labels.notesLabel}
         </label>

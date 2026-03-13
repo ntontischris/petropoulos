@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { PageHeader } from "@/components/ui/page-header";
 import { ServiceDetail } from "@/components/services/service-detail";
 import { CtaBanner } from "@/components/ui/cta-banner";
 import { getLocalizedField } from "@/lib/utils/get-localized-field";
@@ -39,17 +39,9 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
 
   return (
     <>
-      <section className="bg-primary-900 py-20">
-        <Container>
-          <SectionHeading
-            title={t("title")}
-            subtitle={t("subtitle")}
-            className="[&_h2]:text-white [&_p]:text-primary-200"
-          />
-        </Container>
-      </section>
+      <PageHeader title={t("title")} subtitle={t("subtitle")} />
 
-      <section className="py-16">
+      <section className="py-20">
         <Container>
           {(services ?? []).map((service, index) => (
             <ServiceDetail
@@ -62,6 +54,7 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
               )}
               icon={service.icon}
               isReversed={index % 2 === 1}
+              index={index}
             />
           ))}
         </Container>

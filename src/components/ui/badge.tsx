@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils/cn";
 
-type BadgeVariant = "default" | "success" | "accent";
+type BadgeVariant = "default" | "success" | "accent" | "glass";
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -9,9 +9,11 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  default: "bg-primary-100 text-primary-800",
-  success: "bg-green-100 text-green-800",
-  accent: "bg-amber-100 text-amber-800",
+  default: "bg-primary-100 text-primary-800 border border-primary-200/50",
+  success: "bg-green-50 text-green-700 border border-green-200/50",
+  accent: "bg-accent-50 text-accent-900 border border-accent-200/50",
+  glass:
+    "backdrop-blur-md bg-white/20 text-white border border-white/20 shadow-sm",
 };
 
 export function Badge({

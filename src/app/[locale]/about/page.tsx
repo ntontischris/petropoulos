@@ -1,10 +1,12 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
+import { PageHeader } from "@/components/ui/page-header";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
 import { CtaBanner } from "@/components/ui/cta-banner";
-import { Shield, Lightbulb, Target, Eye } from "lucide-react";
+import { Shield, Lightbulb, Target, Eye, Quote } from "lucide-react";
+import { AboutStats } from "@/components/about/about-stats";
 
 interface AboutPageProps {
   params: Promise<{ locale: string }>;
@@ -55,24 +57,17 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-primary-900 py-20">
-        <Container>
-          <SectionHeading
-            title={t("title")}
-            subtitle={t("subtitle")}
-            className="[&_h2]:text-white [&_p]:text-primary-200"
-          />
-        </Container>
-      </section>
+      <PageHeader title={t("title")} subtitle={t("subtitle")} />
 
       {/* Story */}
-      <section className="py-20">
+      <section className="py-24">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold text-primary-800">
-              {t("storyTitle")}
-            </h2>
+            <div className="accent-bar accent-bar-center">
+              <h2 className="text-3xl font-bold text-primary-800">
+                {t("storyTitle")}
+              </h2>
+            </div>
             <p className="mt-6 text-lg leading-relaxed text-secondary-500">
               {t("storyText")}
             </p>
@@ -81,21 +76,23 @@ export default async function AboutPage({ params }: AboutPageProps) {
       </section>
 
       {/* Vision */}
-      <section className="bg-background-alt py-20">
+      <section className="bg-background-alt py-24">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold text-primary-800">
+            <Quote className="mx-auto mb-6 h-10 w-10 text-accent/40" />
+            <h2 className="text-3xl font-bold italic text-primary-800">
               {t("visionTitle")}
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-secondary-500">
               {t("visionText")}
             </p>
+            <div className="mx-auto mt-6 h-1 w-16 rounded-full bg-gradient-to-r from-accent to-accent-light" />
           </div>
         </Container>
       </section>
 
       {/* Values */}
-      <section className="py-20">
+      <section className="py-24">
         <Container>
           <SectionHeading title={t("valuesTitle")} />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -112,24 +109,13 @@ export default async function AboutPage({ params }: AboutPageProps) {
       </section>
 
       {/* Stats */}
-      <section className="bg-primary-800 py-16">
-        <Container>
-          <div className="grid gap-8 sm:grid-cols-3">
-            {[
-              { value: "15+", label: t("statsProjects") },
-              { value: "5+", label: t("statsYears") },
-              { value: "50+", label: t("statsClients") },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-4xl font-bold text-accent">{stat.value}</p>
-                <p className="mt-2 text-sm font-medium text-primary-200">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <AboutStats
+        stats={[
+          { value: "15+", label: t("statsProjects") },
+          { value: "5+", label: t("statsYears") },
+          { value: "50+", label: t("statsClients") },
+        ]}
+      />
 
       <CtaBanner
         title={t("ctaTitle")}

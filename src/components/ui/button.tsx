@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils/cn";
 
-type ButtonVariant = "primary" | "secondary" | "outline";
+type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -12,11 +12,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary-800 text-white hover:bg-primary-900 focus-visible:ring-primary-500",
+    "bg-primary-800 text-white hover:bg-primary-900 focus-visible:ring-primary-500 shadow-md hover:shadow-lg btn-shimmer",
   secondary:
-    "bg-accent text-primary-900 hover:bg-accent-dark focus-visible:ring-accent",
+    "bg-accent text-primary-900 hover:bg-accent-dark focus-visible:ring-accent shadow-md hover:shadow-glow btn-shimmer",
   outline:
     "border-2 border-primary-800 text-primary-800 hover:bg-primary-50 focus-visible:ring-primary-500",
+  ghost: "text-primary-800 hover:bg-primary-50 focus-visible:ring-primary-500",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -37,7 +38,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 hover:-translate-y-0.5 active:translate-y-0",
         variantStyles[variant],
         sizeStyles[size],
         className,

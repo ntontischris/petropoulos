@@ -8,13 +8,13 @@ interface ContactInfoItemProps {
 
 function ContactInfoItem({ icon, label, value }: ContactInfoItemProps) {
   return (
-    <div className="flex items-start gap-4">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-700">
+    <div className="flex items-start gap-4 rounded-xl border border-secondary-100 bg-white p-4 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/20 hover:shadow-card-hover">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent-50 to-accent-100 text-accent-dark">
         {icon}
       </div>
       <div>
-        <p className="text-sm font-medium text-secondary-500">{label}</p>
-        <p className="text-base text-primary-800">{value}</p>
+        <p className="text-sm font-medium text-secondary-400">{label}</p>
+        <p className="mt-0.5 font-medium text-primary-800">{value}</p>
       </div>
     </div>
   );
@@ -41,7 +41,7 @@ export function ContactInfo({
   labels,
 }: ContactInfoProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {phone && (
         <ContactInfoItem
           icon={<Phone className="h-5 w-5" />}

@@ -9,9 +9,7 @@ interface StatItem {
   label: string;
 }
 
-interface AboutPreviewProps {
-  title: string;
-  description: string;
+interface AboutStatsProps {
   stats: StatItem[];
 }
 
@@ -21,28 +19,17 @@ function parseStatValue(value: string): { number: number; suffix: string } {
   return { number: parseInt(match[1], 10), suffix: match[2] };
 }
 
-export function AboutPreview({ title, description, stats }: AboutPreviewProps) {
+export function AboutStats({ stats }: AboutStatsProps) {
   return (
-    <section className="bg-background-alt py-24">
-      <Container>
-        <ScrollReveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="accent-bar accent-bar-center">
-              <h2 className="text-3xl font-bold text-primary-800 sm:text-4xl">
-                {title}
-              </h2>
-            </div>
-            <p className="mt-6 text-lg leading-relaxed text-secondary-500">
-              {description}
-            </p>
-          </div>
-        </ScrollReveal>
-        <div className="mt-16 grid gap-8 sm:grid-cols-3">
+    <section className="relative overflow-hidden bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 py-20">
+      <div className="geometric-pattern absolute inset-0" />
+      <Container className="relative z-10">
+        <div className="grid gap-8 sm:grid-cols-3">
           {stats.map((stat, index) => {
             const { number, suffix } = parseStatValue(stat.value);
             return (
               <ScrollReveal key={stat.label} delay={index * 0.15}>
-                <div className="group rounded-xl border border-secondary-100 bg-white p-8 text-center shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/20 hover:shadow-card-hover">
+                <div className="glass rounded-xl p-8 text-center transition-all duration-300 hover:-translate-y-1">
                   <p className="text-5xl font-bold text-accent">
                     <AnimatedCounter
                       target={number}
@@ -50,7 +37,7 @@ export function AboutPreview({ title, description, stats }: AboutPreviewProps) {
                       duration={2000}
                     />
                   </p>
-                  <p className="mt-3 text-sm font-medium text-secondary-500">
+                  <p className="mt-3 text-sm font-medium text-primary-200/80">
                     {stat.label}
                   </p>
                 </div>

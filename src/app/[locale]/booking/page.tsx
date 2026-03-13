@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { PageHeader } from "@/components/ui/page-header";
 import { BookingWizard } from "@/components/booking/booking-wizard";
 import type { Locale } from "@/types/common";
 
@@ -37,17 +37,9 @@ export default async function BookingPage({ params }: BookingPageProps) {
 
   return (
     <>
-      <section className="bg-primary-900 py-20">
-        <Container>
-          <SectionHeading
-            title={t("title")}
-            subtitle={t("subtitle")}
-            className="[&_h2]:text-white [&_p]:text-primary-200"
-          />
-        </Container>
-      </section>
+      <PageHeader title={t("title")} subtitle={t("subtitle")} />
 
-      <section className="py-16">
+      <section className="py-20">
         <Container>
           <BookingWizard
             bookingTypes={bookingTypes ?? []}

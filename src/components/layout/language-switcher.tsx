@@ -2,6 +2,7 @@
 
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { cn } from "@/lib/utils/cn";
 
 export function LanguageSwitcher() {
   const locale = useLocale();
@@ -17,14 +18,27 @@ export function LanguageSwitcher() {
   return (
     <button
       onClick={handleSwitch}
-      className="flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-medium text-primary-800 transition-colors hover:bg-primary-50"
+      className="flex items-center gap-0.5 rounded-full border border-secondary-200 px-1 py-0.5 text-sm font-medium transition-all duration-300 hover:border-primary-300"
       aria-label={`Switch to ${otherLocale === "el" ? "Greek" : "English"}`}
     >
-      <span className={locale === "el" ? "font-bold" : "text-secondary-400"}>
+      <span
+        className={cn(
+          "rounded-full px-2.5 py-1 transition-all duration-300",
+          locale === "el"
+            ? "bg-primary-800 text-white"
+            : "text-secondary-400 hover:text-secondary-600",
+        )}
+      >
         EL
       </span>
-      <span className="text-secondary-300">|</span>
-      <span className={locale === "en" ? "font-bold" : "text-secondary-400"}>
+      <span
+        className={cn(
+          "rounded-full px-2.5 py-1 transition-all duration-300",
+          locale === "en"
+            ? "bg-primary-800 text-white"
+            : "text-secondary-400 hover:text-secondary-600",
+        )}
+      >
         EN
       </span>
     </button>

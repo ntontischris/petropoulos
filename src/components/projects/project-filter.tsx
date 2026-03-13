@@ -27,16 +27,16 @@ export function ProjectFilter({ filters }: ProjectFilterProps) {
   }
 
   return (
-    <div className="mb-10 flex flex-wrap justify-center gap-2">
+    <div className="mb-12 flex flex-wrap justify-center gap-2">
       {filters.map((filter) => (
         <button
           key={filter.key}
           onClick={() => handleFilter(filter.key)}
           className={cn(
-            "rounded-full px-5 py-2 text-sm font-medium transition-colors",
+            "rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300",
             activeFilter === filter.key
-              ? "bg-primary-800 text-white"
-              : "bg-secondary-100 text-secondary-600 hover:bg-secondary-200",
+              ? "bg-accent text-white shadow-md shadow-accent/20"
+              : "border border-secondary-200 bg-white text-secondary-600 hover:border-accent/30 hover:text-primary-800",
           )}
         >
           {filter.label}

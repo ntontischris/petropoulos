@@ -1,3 +1,5 @@
+"use client";
+
 import {
   TrendingUp,
   Hammer,
@@ -8,6 +10,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { Link } from "@/i18n/navigation";
 import type { Service } from "@/types/database";
 import type { Locale } from "@/types/common";
@@ -35,21 +38,29 @@ export function ServicesOverview({
   subtitle,
 }: ServicesOverviewProps) {
   return (
-    <section className="py-20 bg-background-alt">
+    <section className="bg-background-alt py-24">
       <Container>
-        <SectionHeading title={title} subtitle={subtitle} />
+        <ScrollReveal>
+          <SectionHeading title={title} subtitle={subtitle} />
+        </ScrollReveal>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <Link key={service.id} href="/services" className="block">
-              <Card
-                title={getLocalizedField(service, "title", locale)}
-                description={getLocalizedField(service, "description", locale)}
-                icon={
-                  iconMap[service.icon] ?? <Building2 className="h-6 w-6" />
-                }
-                className="h-full transition-transform hover:-translate-y-1"
-              />
-            </Link>
+          {services.map((service, index) => (
+            <ScrollReveal key={service.id} delay={index * 0.1}>
+              <Link href="/services" className="block h-full">
+                <Card
+                  title={getLocalizedField(service, "title", locale)}
+                  description={getLocalizedField(
+                    service,
+                    "description",
+                    locale,
+                  )}
+                  icon={
+                    iconMap[service.icon] ?? <Building2 className="h-6 w-6" />
+                  }
+                  className="h-full border-t-4 border-t-transparent transition-all hover:border-t-accent"
+                />
+              </Link>
+            </ScrollReveal>
           ))}
         </div>
       </Container>

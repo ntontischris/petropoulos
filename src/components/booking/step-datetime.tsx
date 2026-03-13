@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils/cn";
+import { Video, Phone, Users } from "lucide-react";
 import { BOOKING_CONFIG } from "@/lib/constants";
 
 interface StepDatetimeProps {
@@ -37,9 +38,9 @@ function getMinDate(): string {
 const timeSlots = generateTimeSlots();
 
 const methods = [
-  { key: "video_call" as const, icon: "📹" },
-  { key: "phone" as const, icon: "📞" },
-  { key: "in_person" as const, icon: "🤝" },
+  { key: "video_call" as const, icon: Video, labelKey: "methodVideoCall" },
+  { key: "phone" as const, icon: Phone, labelKey: "methodPhone" },
+  { key: "in_person" as const, icon: Users, labelKey: "methodInPerson" },
 ];
 
 export function StepDatetime({
@@ -52,7 +53,7 @@ export function StepDatetime({
   labels,
 }: StepDatetimeProps) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {/* Date */}
       <div>
         <label className="mb-3 block text-sm font-medium text-primary-800">
@@ -63,7 +64,7 @@ export function StepDatetime({
           min={getMinDate()}
           value={selectedDate ?? ""}
           onChange={(e) => onDateChange(e.target.value)}
-          className="w-full rounded-lg border border-secondary-200 px-4 py-3 text-primary-800 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+          className="w-full rounded-xl border border-secondary-200 bg-secondary-50 px-4 py-3 text-primary-800 transition-all focus:border-primary-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20"
         />
       </div>
 
@@ -79,10 +80,10 @@ export function StepDatetime({
                 key={slot}
                 onClick={() => onTimeChange(slot)}
                 className={cn(
-                  "rounded-lg border px-3 py-2 text-sm font-medium transition-colors",
+                  "rounded-lg border px-3 py-2.5 text-sm font-medium transition-all duration-200",
                   selectedTime === slot
-                    ? "border-primary-800 bg-primary-800 text-white"
-                    : "border-secondary-200 text-secondary-600 hover:border-primary-300",
+                    ? "border-accent bg-accent text-white shadow-md shadow-accent/20"
+                    : "border-secondary-200 bg-white text-secondary-600 hover:border-accent/30 hover:bg-accent-50",
                 )}
               >
                 {slot}
@@ -99,27 +100,33 @@ export function StepDatetime({
             {labels.selectMethod}
           </label>
           <div className="grid grid-cols-3 gap-3">
-            {methods.map((method) => (
-              <button
-                key={method.key}
-                onClick={() => onMethodChange(method.key)}
-                className={cn(
-                  "rounded-xl border-2 p-4 text-center transition-all",
-                  selectedMethod === method.key
-                    ? "border-primary-800 bg-primary-50"
-                    : "border-secondary-200 hover:border-primary-300",
-                )}
-              >
-                <span className="text-2xl">{method.icon}</span>
-                <p className="mt-2 text-sm font-medium text-primary-800">
-                  {
-                    labels[
-                      `method${method.key === "video_call" ? "VideoCall" : method.key === "phone" ? "Phone" : "InPerson"}` as keyof typeof labels
-                    ]
-                  }
-                </p>
-              </button>
-            ))}
+            {methods.map((method) => {
+              const Icon = method.icon;
+              return (
+                <button
+                  key={method.key}
+                  onClick={() => onMethodChange(method.key)}
+                  className={cn(
+                    "rounded-xl border-2 p-5 text-center transition-all duration-300 hover:-translate-y-0.5",
+                    selectedMethod === method.key
+                      ? "border-accent bg-accent-50 shadow-md shadow-accent/10"
+                      : "border-secondary-200 bg-white hover:border-accent/30",
+                  )}
+                >
+                  <Icon
+                    className={cn(
+                      "mx-auto h-7 w-7",
+                      selectedMethod === method.key
+                        ? "text-accent-dark"
+                        : "text-secondary-400",
+                    )}
+                  />
+                  <p className="mt-3 text-sm font-medium text-primary-800">
+                    {labels[method.labelKey as keyof typeof labels]}
+                  </p>
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
